@@ -9,4 +9,12 @@ public class DateUtils {
         long daysDifference = difference / (1000 * 60 * 60 * 24);
         return (int) daysDifference;
     }
+    public static Date getCurrentDate() {
+        long currentTimeMillis = System.currentTimeMillis();
+
+        // Create a Date object using the current time
+        Date currentDate = new Date(currentTimeMillis);
+        return currentDate;
+    }
+
 }

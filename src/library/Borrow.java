@@ -14,34 +14,52 @@ class Borrow {
     }
 
     public boolean canCustomerBorrow() {
-        boolean isBookInLibrary;
         if (customer.canborrow()) {
+//            System.out.println("customer can borrow");
             for (Book book : Library.getInstance().getBooks()) {
+//                System.out.println("book is aviable");
                 if (book.getTitle().equalsIgnoreCase(book.getTitle())) {
                     if (!book.isBorrowed()) {
-                        isBookInLibrary = true;
+                       return true;
                     }
-                } else return false;
+                }
             } // Found the book
         }
+        return false;
+    }
 
-        Library.getInstance().getBooks();
+       // Library.getInstance().getBooks();
 
-        if (customer.canborrow()) {
+//        if (customer.canborrow()) {
+//            return true;
+//
+//        } else {
+//            return false;
+//        }
+   // }
+
+
+
+    public boolean borrowBook() {
+        Borrow borrow = new Borrow(customer, borrowDate, book);
+
+        if (borrow.canCustomerBorrow()) {
+            book.setBorrowed(true);
+            Library.getInstance().addBorrowsInfo(borrow);
+            customer.addBorrowedBook(borrow);
             return true;
 
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
     public String toString() {
         return "Borrow{" +
-                "customer=" + customer +
+
                 ", book=" + book +
                 ", borrowDate=" + borrowDate +
-                '}';
+                "}\n";
     }
 
     public Customer getCustomer() {
