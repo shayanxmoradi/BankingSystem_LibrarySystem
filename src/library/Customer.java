@@ -38,7 +38,7 @@ class Customer {
             int diffrentInDays = DateUtils.borrowDateInDays(borrow.getBorrowDate(), 7);
             if (diffrentInDays <= 7) return 0;
             else {
-                debtAmount = (diffrentInDays - 7) * DEBT_PENALTY;
+                debtAmount += (diffrentInDays - 7) * DEBT_PENALTY;
             }
 
         }
@@ -63,6 +63,7 @@ class Customer {
     }
 
     public double getDebtAmount() {
+        calculateDebtAmount();
         return debtAmount;
     }
 
