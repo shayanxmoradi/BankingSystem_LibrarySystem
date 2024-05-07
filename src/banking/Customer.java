@@ -3,15 +3,25 @@ package banking;
  class Customer {
     private String name;
     private Account account;
+    private Account[] accounts= new Account[1];
 
     public Customer(String name, Account account) {
         this.name = name;
         this.account = account;
+        accounts[0] = account;
     }
+
 
     public double calCustomerBalance() {
         return account.getCreditCard().getCurrentBalance();
     }
+     public void addAccounts(Account account) {
+         int sizeBevore=  accounts.length;
+         Account[] newAccounts= new Account[sizeBevore+1];
+         System.arraycopy(accounts, 0, newAccounts, 0, sizeBevore);
+         newAccounts[sizeBevore] = account;
+         accounts = newAccounts;
+     }
 
     @Override
     public String toString() {
@@ -35,4 +45,10 @@ package banking;
     public void setAccount(Account account) {
         this.account = account;
     }
-}
+
+     public Account[] getAccounts() {
+         return accounts;
+     }
+
+
+ }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class Library {
     private static Library instance;
 
-    // Private constructor to prevent instantiation from outside
     private Library() {
         // Initialize lists
         this.books = new ArrayList<>();
@@ -18,7 +17,6 @@ public class Library {
         this.borrowsInfo = new ArrayList<>();
     }
 
-    // Public method to get the singleton instance
     public static Library getInstance() {
         if (instance == null) {
             synchronized (Library.class) {
@@ -38,16 +36,24 @@ public class Library {
 
     }
 
-//    public List<Customer> getCustomer(String firstName, String lastName) {
-//        return customers.stream()
-//                .filter(customer -> customer.getFirstName().equals(firstName) &&
-//                        customer.getLastName().equals(lastName))
-//                .collect(Collectors.toList());
-//    }
+
     public Customer getCustomer(String firstName, String lastName) {
-    for (Customer customer : Library.getInstance().getCustomers()) {
-        if (customer.getFirstName().equals(firstName) && customer.getLastName().equals(lastName)) {
-            return customer;
+        for (Customer customer : Library.getInstance().getCustomers()) {
+            if (customer.getFirstName().equals(firstName) && customer.getLastName().equals(lastName)) {
+                return customer;
+            }
+        }
+        System.err.println("\n\n----->Customer not found<------\n\n");
+        return null;
+    }
+
+    public Borrow getBorrow(Customer customer,String bookTitle) {
+    for (Borrow borrow : Library.getInstance().getBorrowsInfo()) {
+        if (borrow.getCustomer().getFirstName().equals(customer.getFirstName()) &&
+                borrow.getCustomer().getLastName().equals(customer.getLastName()) &&
+                borrow.getBook().getTitle().equals(bookTitle)
+                        ) {
+            return borrow;
         }
     }
     throw new RuntimeException("Customer not found");
@@ -150,5 +156,10 @@ public class Library {
 
     public void addBorrowsInfo(Borrow borrowsInfo) {
         this.borrowsInfo.add(borrowsInfo);
+    }
+    public void removeBorrowsInfo(Borrow borrowsInfo) {
+       Borrow removeBorrow= Library.getInstance().getBorrow(borrowsInfo.getCustomer(),borrowsInfo.getBook().getTitle());
+       // Library.getInstance().getBorrowsInfo().get(0)
+        this.borrowsInfo.remove(removeBorrow);
     }
 }

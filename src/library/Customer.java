@@ -82,6 +82,9 @@ class Customer {
     public void addBorrowedBook(Borrow borrowedBook) {
         this.borrowedBooks.add(borrowedBook);
     }
+    public void removeBorrowedBook(Borrow borrowedBook) {
+        this.borrowedBooks.remove(borrowedBook);
+    }
 
     @Override
     public String toString() {

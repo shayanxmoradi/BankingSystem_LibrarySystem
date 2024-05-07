@@ -28,17 +28,6 @@ class Borrow {
         return false;
     }
 
-       // Library.getInstance().getBooks();
-
-//        if (customer.canborrow()) {
-//            return true;
-//
-//        } else {
-//            return false;
-//        }
-   // }
-
-
 
     public boolean borrowBook() {
         Borrow borrow = new Borrow(customer, borrowDate, book);
@@ -51,6 +40,16 @@ class Borrow {
 
         }
         return false;
+    }
+    public boolean returnBook() {
+
+     Borrow borrow = new Borrow(customer, borrowDate, book);
+
+           // book.setBorrowed(false);
+            Library.getInstance().removeBorrowsInfo(borrow);
+            customer.removeBorrowedBook(borrow);
+            return true;
+
     }
 
 
