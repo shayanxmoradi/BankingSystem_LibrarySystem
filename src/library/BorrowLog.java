@@ -2,25 +2,25 @@ package library;
 
 import java.util.Date;
 
-class Borrow {
+public class BorrowLog {
     private Customer customer;
     private Book book;
     private Date borrowDate;
 
-    public Borrow(Customer customer, Date borrowDate, Book book) {
+    public BorrowLog(Customer customer, Date borrowDate, Book book) {
         this.customer = customer;
         this.borrowDate = borrowDate;
         this.book = book;
     }
 
     public boolean canCustomerBorrow() {
-        if (customer.canborrow()) {
+        if (customer.canBorrow()) {
 //            System.out.println("customer can borrow");
             for (Book book : Library.getInstance().getBooks()) {
 //                System.out.println("book is aviable");
                 if (book.getTitle().equalsIgnoreCase(book.getTitle())) {
                     if (!book.isBorrowed()) {
-                       return true;
+                        return true;
                     }
                 }
             } // Found the book
@@ -30,26 +30,42 @@ class Borrow {
 
 
     public boolean borrowBook() {
-        Borrow borrow = new Borrow(customer, borrowDate, book);
+        BorrowLog borrowLog = new BorrowLog(customer, borrowDate, book);
 
-        if (borrow.canCustomerBorrow()) {
+        if (borrowLog.canCustomerBorrow()) {
             book.setBorrowed(true);
-            Library.getInstance().addBorrowsInfo(borrow);
-            customer.addBorrowedBook(borrow);
+            Library.getInstance().addBorrowsInfo(borrowLog);
+            customer.addBorrowedBook(borrowLog);
             return true;
 
         }
         return false;
     }
+
     public boolean returnBook() {
 
-     Borrow borrow = new Borrow(customer, borrowDate, book);
+        BorrowLog borrowLog = new BorrowLog(customer, borrowDate, book);
 
-           // book.setBorrowed(false);
-            Library.getInstance().removeBorrowsInfo(borrow);
-            customer.removeBorrowedBook(borrow);
-            return true;
+        // book.setBorrowed(false);
+        Library.getInstance().removeBorrowsInfo(borrowLog);
+        System.out.println("brefore" + customer.toString());
+        customer.removeBorrowedBook(borrowLog);
+        System.out.println("after" + customer.toString());
+        // customer.calculateDebtAmount();
 
+
+        return true;
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BorrowLog) {
+            BorrowLog borrowLog = (BorrowLog) obj;
+            return customer.equals(borrowLog.customer) && book.getTitle().equalsIgnoreCase(borrowLog.book.getTitle());
+
+        }
+        return false;
     }
 
 
