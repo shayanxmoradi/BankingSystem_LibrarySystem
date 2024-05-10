@@ -6,10 +6,11 @@ public class Author {
     private int birthDate;
     private String email;
 
-    public Author(String name, String lastName, int birthDate) {
+    public Author(String name, String lastName, int birthDate, String email) {
         this.name = name;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.email = email;
     }
 
     public String getEmail() {

@@ -6,14 +6,16 @@ package library;
     private Author author;
     private int year;
     private boolean isBorrowed;
+    private String publisher;
    //private Long id;
 
-    public Book(String title, Author author, String theme, int year, boolean isBorrowed) {
+    public Book(String title, Author author, String theme, int year, boolean isBorrowed,String publisher) {
        this.title = title;
        this.author = author;
        this.theme = theme;
        this.year = year;
        this.isBorrowed = isBorrowed;
+       this.publisher = publisher;
     }
 
     @Override
