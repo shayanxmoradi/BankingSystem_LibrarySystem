@@ -1,12 +1,12 @@
 package library;
 
- class Book {
+ public class Book {
     private String title;
     private  String theme;
     private Author author;
     private int year;
     private boolean isBorrowed;
-    private Long id;
+   //private Long id;
 
     public Book(String title, Author author, String theme, int year, boolean isBorrowed) {
        this.title = title;

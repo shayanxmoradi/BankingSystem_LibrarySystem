@@ -13,7 +13,12 @@ package banking;
 
 
     public double calCustomerBalance() {
-        return account.getCreditCard().getCurrentBalance();
+        double balance = 0;
+        for (Account account : accounts) {
+            balance+= account.getCreditCard().getCurrentBalance();
+        }
+        return balance;
+
     }
      public void addAccounts(Account account) {
          int sizeBevore=  accounts.length;

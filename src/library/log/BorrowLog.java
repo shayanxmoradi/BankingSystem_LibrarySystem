@@ -1,4 +1,8 @@
-package library;
+package library.log;
+
+import library.Book;
+import library.Customer;
+import library.Library;
 
 import java.util.Date;
 
@@ -15,10 +19,8 @@ public class BorrowLog {
 
     public boolean canCustomerBorrow() {
         if (customer.canBorrow()) {
-//            System.out.println("customer can borrow");
             for (Book book : Library.getInstance().getBooks()) {
-//                System.out.println("book is aviable");
-                if (book.getTitle().equalsIgnoreCase(book.getTitle())) {
+                if (book.getTitle().equalsIgnoreCase(this.book.getTitle())) {
                     if (!book.isBorrowed()) {
                         return true;
                     }
@@ -46,13 +48,10 @@ public class BorrowLog {
 
         BorrowLog borrowLog = new BorrowLog(customer, borrowDate, book);
 
-        // book.setBorrowed(false);
         Library.getInstance().removeBorrowsInfo(borrowLog);
         System.out.println("brefore" + customer.toString());
         customer.removeBorrowedBook(borrowLog);
         System.out.println("after" + customer.toString());
-        // customer.calculateDebtAmount();
-
 
         return true;
 

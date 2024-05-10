@@ -1,20 +1,16 @@
 package library;
 
+import library.log.BorrowLog;
 import library.menu.Menu;
 import library.util.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        //returning has problem.
         Library.getInstance().iniateData();
         Menu.displayMenu();
     }
@@ -42,8 +38,12 @@ public class Main {
     }
 
     public static void getAuthors(String familyName) {
+        boolean nothingfound = true;
         for (Author author : Library.getInstance().getAuthors(familyName)) {
             System.out.println(author);
+            nothingfound = false;
+        }
+        if (!nothingfound) {
             return;
         }
         System.out.println("nothing found");
@@ -65,6 +65,5 @@ public class Main {
             return;
         }
         System.out.println("nothing found");
-
     }
 }
